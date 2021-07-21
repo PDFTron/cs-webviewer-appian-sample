@@ -16,8 +16,6 @@ import com.appiancorp.suiteapi.content.ContentOutputStream;
 import com.appiancorp.suiteapi.content.ContentService;
 import com.appiancorp.suiteapi.content.exceptions.*;
 import com.appiancorp.suiteapi.knowledge.Document;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -31,7 +29,6 @@ import static com.pdftron.webviewer.templates.WebViewerConnectedSystem.UPLOAD_DO
 
 @TemplateId(name = "WebViewerStorageClientApi")
 public class WebViewerStorageClientApi extends SimpleClientApi {
-    Logger logger = LoggerFactory.getLogger(WebViewerStorageClientApi.class);
 
     @Override
     protected ClientApiResponse execute(
@@ -56,7 +53,6 @@ public class WebViewerStorageClientApi extends SimpleClientApi {
                 newDocName = (String) simpleClientApiRequest.getPayload().get("newDocName");
                 
         } catch (Exception e) {
-            logger.error("Unable to get data from client", e);
             resultMap.put("error", e.getLocalizedMessage());
             return new ClientApiResponse(resultMap);
         }
@@ -88,13 +84,11 @@ public class WebViewerStorageClientApi extends SimpleClientApi {
                 cos.write(docBytes);
                 newDocId = cos.getContentId();
             } catch (Exception e) {
-                logger.error("Error uploading doc", e);
                 resultMap.put("error", e.getLocalizedMessage());
                 return new ClientApiResponse(resultMap);
             }
 
             // Return the document id back to the Rich Text Editor.
-            logger.info("Returning new docId to client:" + newDocId);
             resultMap.put("docId", newDocId);
         }
         else{
@@ -110,12 +104,9 @@ public class WebViewerStorageClientApi extends SimpleClientApi {
                 Path path = Paths.get(cs.getInternalFilename(newVersionDocId));
                 Files.write(path,docBytes);
             } catch (Exception e) {
-                logger.error("Error in provided document Id", e);
                 resultMap.put("error", e.getLocalizedMessage());
                 return new ClientApiResponse(resultMap);
             }
-
-            logger.info("Returning existing docId to client:" + newVersionDocId);
             resultMap.put("docId", newVersionDocId);
         }
 

@@ -11,8 +11,6 @@ import com.appiancorp.suiteapi.common.ServiceLocator;
 import com.appiancorp.suiteapi.content.ContentConstants;
 import com.appiancorp.suiteapi.content.ContentService;
 import com.appiancorp.suiteapi.knowledge.Document;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -24,7 +22,6 @@ import static com.pdftron.webviewer.templates.WebViewerConnectedSystem.UPLOAD_DO
 
 @TemplateId(name = "WebViewerRetrieveClientApi")
 public class WebViewerRetrieveClientApi extends SimpleClientApi {
-    Logger logger = LoggerFactory.getLogger(WebViewerRetrieveClientApi.class);
 
     @Override
     protected ClientApiResponse execute(
@@ -40,7 +37,6 @@ public class WebViewerRetrieveClientApi extends SimpleClientApi {
         try {
             documentId = ((Number) simpleClientApiRequest.getPayload().get("documentId")).longValue();
         } catch (Exception e) {
-            logger.error("Unable to get data from client", e);
             resultMap.put("error", e.getLocalizedMessage());
             return new ClientApiResponse(resultMap);
         }
@@ -60,13 +56,10 @@ public class WebViewerRetrieveClientApi extends SimpleClientApi {
             docName = file.getDisplayName();
             docData = Base64.getEncoder().encodeToString(docBytes);
         } catch (Exception e) {
-            logger.error("Error retrieving doc", e);
             resultMap.put("error", e.getLocalizedMessage());
             return new ClientApiResponse(resultMap);
         }
 
-
-        logger.info("Returning existing docData to client for documentID: " + documentId);
         resultMap.put("docData", docData);
         resultMap.put("docName", docName);
 
