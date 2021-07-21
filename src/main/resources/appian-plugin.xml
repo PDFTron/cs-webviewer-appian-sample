@@ -1,0 +1,14 @@
+<appian-plugin name="PDFTron's WebViewer Connected System" key="com.pdftron.webviewer">
+
+  <plugin-info>
+    <description>PDFTron's WebViewer Connected System</description>
+    <vendor name="PDFTron" url="https://www.pdftron.com" />
+    <version>1.0.0.0</version>
+    <application-version min="7.6.0.4" />
+  </plugin-info>
+
+  <connected-system-template key="WebViewerConnectedSystem" name="WebViewerConnectedSystem" class="com.pdftron.webviewer.templates.WebViewerConnectedSystem">
+    <client-api key="" name="WebViewerRetrieveClientApi" class="com.pdftron.webviewer.templates.WebViewerRetrieveClientApi" />
+    <client-api key="" name="WebViewerStorageClientApi" class="com.pdftron.webviewer.templates.WebViewerStorageClientApi" />
+  </connected-system-template>
+</appian-plugin>
