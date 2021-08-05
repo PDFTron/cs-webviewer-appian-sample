@@ -24,7 +24,6 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.pdftron.webviewer.templates.WebViewerConnectedSystem.UPLOAD_FOLDER_UUID_PROP;
 import static com.pdftron.webviewer.templates.WebViewerConnectedSystem.UPLOAD_DOC_AS_PROP;
 
 @TemplateId(name = "WebViewerStorageClientApi")
@@ -36,22 +35,24 @@ public class WebViewerStorageClientApi extends SimpleClientApi {
 
         Map<String,Object> resultMap = new HashMap<>();
 
-        String uploadFolderUuid = simpleClientApiRequest.getConnectedSystemConfiguration().getValue(UPLOAD_FOLDER_UUID_PROP);
         String uploadImageAsUser = simpleClientApiRequest.getConnectedSystemConfiguration().getValue(UPLOAD_DOC_AS_PROP);
 
         // Obtain the values from the request sent from the rich text editor.
         String docData,newDocName = "New Document";
         long existingDocument = 0;
+        long uploadFolder = 0;
         boolean createNewDocument;
 
         try {
             docData = (String) simpleClientApiRequest.getPayload().get("base64");
             createNewDocument = (boolean) simpleClientApiRequest.getPayload().get("createNewDocument");
-            if(!createNewDocument)
+            if(!createNewDocument) {
                 existingDocument = ((Number) simpleClientApiRequest.getPayload().get("documentId")).longValue();
-            else
+            } else {
                 newDocName = (String) simpleClientApiRequest.getPayload().get("newDocName");
-                
+                uploadFolder = ((Number) simpleClientApiRequest.getPayload().get("documentFolder")).longValue();
+            }
+                   
         } catch (Exception e) {
             resultMap.put("error", e.getLocalizedMessage());
             return new ClientApiResponse(resultMap);
@@ -70,8 +71,6 @@ public class WebViewerStorageClientApi extends SimpleClientApi {
         ContentService cs = ServiceLocator.getContentService(uploadImageUserCtx);
 
         if(createNewDocument) {
-            long uploadFolder = cs.getIdByUuid(uploadFolderUuid);
-
             Document doc = new Document();
             doc.setName(newDocName);
             doc.setDescription("Document generated from the WebViewer component");
