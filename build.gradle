@@ -28,6 +28,10 @@ jar {
   manifest {
     attributes("Spring-Context": "*;publish-context:=false")
   }
+
+  into('src') {
+    from (sourceSets.main.allJava)
+  }
 }
 
 
