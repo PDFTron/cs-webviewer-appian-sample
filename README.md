@@ -1,5 +1,5 @@
 # cs-webviewer-appian-sample
-Connected System for Appian WebViewer Component
+Connected System for Appian WebViewer Component. You can install it directly from [Appian Marketplace](https://community.appian.com/b/appmarket/posts/pdftron-web-viewer-connected-system).
 
 ## How to install
 The Component Plug-in and the Connected System Plug-in are packaged in two separate bundles. Installing both requires creating both bundles and then placing both into the plug-in directory separately
