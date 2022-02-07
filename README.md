@@ -11,3 +11,7 @@ The Component Plug-in and the Connected System Plug-in are packaged in two separ
 
 #### Installing the Component Plug-in
 * See [WebViewer Plugin](https://github.com/PDFTron/webviewer-appian-sample) for installation instructions for the Component Plug-in
+
+## How to check for security vulnerablities
+
+Run `./gradlew dependencyCheckAnalyze`.
