@@ -14,4 +14,4 @@ The Component Plug-in and the Connected System Plug-in are packaged in two separ
 
 ## How to check for security vulnerablities
 
-Run `./gradlew dependencyCheckAnalyze`.
+Run `gradlew dependencyCheckAnalyze`. Afterwards, update `build.gradle`. Build the package. Run vulnerability check again.
