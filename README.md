@@ -16,7 +16,7 @@ The Component Plug-in and the Connected System Plug-in are packaged in two separ
 
 Appian may reach out regarding security vulnerabilties with the dependencies to this package. A security report will outline which packages are affected and we will have to update them to fix this.
 
-1. Run `gradlew dependencyCheckAnalyze` to verify that the reported packages are the same as the ones Appian identified.
+1. Run `./gradlew dependencyCheckAnalyze` to verify that the reported packages are the same as the ones Appian identified.
 2. Update `build.gradle` with the latest packages that address the vulnerability.
 3. Build the package with `./gradlew build`.
 4. Run vulnerability check again and the vulnerabilities should hopefully be addressed.
